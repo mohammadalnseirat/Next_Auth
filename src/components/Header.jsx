@@ -1,8 +1,17 @@
 "use client";
 
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { useState } from "react";
-import { FaUser, FaBars, FaTimes, FaHome, FaInfoCircle, FaSignInAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaInfoCircle,
+  FaSignInAlt,
+} from "react-icons/fa";
+import { AuthButton } from ".";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,13 +33,9 @@ const Header = () => {
 
         {/* Mobile Menu Button and Sign In */}
         <div className="md:hidden flex items-center gap-4">
-          <Link
-            href={"/signin"}
-            className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-300 flex items-center gap-2"
-          >
-            <FaSignInAlt />
-            Sign In
-          </Link>
+          <div className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-300 flex items-center gap-2">
+            <AuthButton />
+          </div>
           <button
             className="text-gray-700 hover:text-gray-900"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -42,18 +47,22 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-4">
-            <Link href={"/"} className="hover:text-blue-700 transition-colors flex items-center gap-2">
+            <Link
+              href={"/"}
+              className="hover:text-blue-700 transition-colors flex items-center gap-2"
+            >
               <FaHome />
               Home
             </Link>
-            <Link href={"/about"} className="hover:text-blue-700 transition-colors flex items-center gap-2">
+            <Link
+              href={"/about"}
+              className="hover:text-blue-700 transition-colors flex items-center gap-2"
+            >
               <FaInfoCircle />
               About
             </Link>
-            <Link href={"/signin"} className="hover:text-blue-700 transition-colors flex items-center gap-2">
-              <FaSignInAlt />
-              Sign In
-            </Link>
+            {/* Add Sign In Button and User Button */}
+            <AuthButton />
           </ul>
         </nav>
 
