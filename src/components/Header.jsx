@@ -9,9 +9,8 @@ import {
   FaTimes,
   FaHome,
   FaInfoCircle,
-  FaSignInAlt,
 } from "react-icons/fa";
-import { AuthButton } from ".";
+import AuthButton from "./AuthButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
