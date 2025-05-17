@@ -49,15 +49,15 @@ const Header = () => {
 
         {/* Mobile Menu Button and Sign In */}
         <div className="md:hidden flex items-center gap-4">
-          <div className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-300 flex items-center gap-2">
-            <AuthButton />
-          </div>
           <button
             className="text-gray-700 hover:text-gray-900"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
+          <div className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-md text-gray-700 hover:text-gray-900 transition-all duration-300 flex items-center gap-2">
+            <AuthButton />
+          </div>
         </div>
 
         {/* Desktop Navigation */}
