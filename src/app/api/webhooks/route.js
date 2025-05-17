@@ -1,4 +1,4 @@
-import { createOrUpdateUser, deleteUser } from "@/lib/actions/user.action";
+import { createOrUpdateUser, deleteUser } from "@/lib/actions/user";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
 
