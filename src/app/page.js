@@ -4,14 +4,13 @@ import { FaGithub } from "react-icons/fa";
 import { SiClerk } from "react-icons/si";
 export default function HomePage() {
   return (
-    <div className="min-h-screen px-2 sm:px-4 py-12 max-w-5xl mx-auto">
+    <div className="min-h-screen px-1 sm:px-2 md:px-4 lg:px-6 xl:px-8 py-12 max-w-4xl mx-auto">
       <h1 className="gradient-text text-3xl sm:text-4xl font-extrabold text-center mb-8">
         Welcome to Our Next Auth Application
       </h1>
       <div className="flex flex-col items-center p-6 space-y-6">
         <img
           src={"/auth-one.jpg"}
-          // src="https://kivuto.com/wp-content/uploads/2021/06/User_Authentication_Best_Practices_Image.jpg"
           alt="auth-one"
           className="rounded-lg h-96 w-full object-cover mb-6"
         />
