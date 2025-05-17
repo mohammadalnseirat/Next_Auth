@@ -1,3 +1,4 @@
+import { createOrUpdateUser, deleteUser } from "@/lib/actions/user.action";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
 
@@ -51,11 +52,48 @@ export async function POST(req) {
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log("Webhook body:", body);
 
-  if (eventType === "user.created") {
-    console.log("User Created");
+  if (eventType === "user.created" || eventType === "user.updated") {
+    const { id, first_name, last_name, image_url, email_addresses, username } =
+      evt?.data;
+
+    try {
+      await createOrUpdateUser(
+        id,
+        first_name,
+        last_name,
+        image_url,
+        email_addresses,
+        username
+      );
+
+      //! return a success response:
+      return new Response("User is Created Or Updated Successfully!", {
+        status: 200,
+      });
+    } catch (error) {
+      console.log("Error creating or updating user", error);
+      return new Response("Error creating or updating user", {
+        status: 400,
+      });
+    }
   }
-  if (eventType === "user.updated") {
-    console.log("User Updated");
+
+
+  if (eventType === 'user.deleted') {
+    const { id } = evt?.data;
+    try {
+      await deleteUser(id);
+
+      //! return a success response:
+      return new Response("User is Deleted Successfully!", {
+        status: 200,
+      });
+    } catch (error) {
+      console.log("Error deleting user", error);
+      return new Response("Error deleting user", {
+        status: 400,
+      });
+    }
   }
 
   return new Response("", { status: 200 });
