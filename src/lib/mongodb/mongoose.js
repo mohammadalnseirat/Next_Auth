@@ -12,7 +12,7 @@ export const connectToMongoDB = async () => {
 
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "next auth app",
+      dbName: "next-auth-app",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
