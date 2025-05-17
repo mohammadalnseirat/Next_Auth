@@ -2,7 +2,7 @@
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaUser,
   FaBars,
@@ -14,6 +14,23 @@ import AuthButton from "./AuthButton";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const sideBarRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutSide = (e) => {
+      if (isMenuOpen && sideBarRef.current && !sideBarRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    //! Add event listener to the document
+    document.addEventListener("mousedown", handleClickOutSide);
+
+    //! Cleanup event listener on unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="bg-gradient-to-r from-blue-300 to-purple-400 shadow-lg">
@@ -67,6 +84,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div
+          ref={sideBarRef}
           className={`md:hidden fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-blue-300 to-purple-400 shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
@@ -82,7 +100,7 @@ const Header = () => {
               <li>
                 <Link
                   href={"/"}
-                  className=" py-2 text-lg font-medium text-gray-700 hover:text-blue-700 transition-colors flex items-center justify-center gap-2 w-full hover:bg-blue-200 rounded-md p-2"
+                  className="py-2 text-lg font-medium text-gray-700 hover:text-blue-700 transition-colors flex items-center justify-center gap-2 w-full hover:bg-blue-200 rounded-md p-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <FaHome />
